@@ -22,14 +22,7 @@ li p {
 
 }
 
-/* Adds some space above and below the logo to make it look right and centers the image */
-#logo {
-	margin-top: 8px;
-	margin-bottom: -15px;
-	display: block;
-	text-align: center;
-	background-color: #EDEDED;
-}
+
 
 /* Makes the banner image auto-resizable for any phone.  Will not let the max-width get bigger than the original size */
 img.banner {
