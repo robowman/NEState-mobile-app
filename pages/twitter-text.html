@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Northeast State Twitter</title>
+    
+
+ <script type="text/javascript"> 
+		function appReady(){
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET","http://twitter.com/status/user_timeline/northeaststate.json",true); 		
+		ajax.send();								
+		
+			ajax.onreadystatechange=function(){
+				if(ajax.readyState==4 && (ajax.status==200||ajax.status==0)){
+					eval('var data = ' + ajax.responseText + ';');
+					var theResults = data;
+					var theHTML = '';
+					for(var i=0;i<theResults.length;i++){		
+			
+					// create links 
+					var tweet = theResults[i].text;
+					var pattern = /(HTTP:\/\/|HTTPS:\/\/)([a-zA-Z0-9.\/&?_=!*,\(\)+-]+)/i;
+					var replace = "<a href=\"$1$2\">$1$2</a>";
+					tweet = tweet.replace(pattern , replace);
+					// reformat the date stamp
+			
+					var datepostedarray = theResults[i].created_at.split(" ");
+					theHTML += ['<ul><table class="tweet">',
+					'<tr><td class="avatar"> <img src='+theResults[i]['user'].profile_image_url+' /></td>',
+					'<td class="tweet_content">',
+					'<a href="'+theResults[i]['user'].url+'">'+theResults[i]['user'].screen_name+'</a>',
+					'<br />'+tweet+'<br />',		
+					'<span class="timeposted">Posted on '+datepostedarray[0]+" "+datepostedarray[1]+" 	"+datepostedarray[2]+" "+datepostedarray[5]+" "+datepostedarray[3]+'',		
+					'</td></tr>',
+					'</table></ul>'].join('');
+					}
+				
+		document.getElementById('main').innerHTML = theHTML;
+		}
+		}
+		}
+					document.addEventListener("deviceready", appReady, false);
+		
+        </script>
+
+<style type="text/css">
+
+
+
+.tweet {
+	padding-bottom:5px;
+}
+
+.avatar {
+	/* height:48px; */
+	width:15%;
+}
+
+.tweet_content {
+	width:85%;
+	/* margin-left:60px; 
+	min-height:48px; */
+}
+
+.tweet_content a {
+	text-decoration:none;
+	color:#107e2d;	
+}
+
+.timeposted
+{
+	font-size:smaller;
+	color:#012E40
+	
+}
+
+</style>
+    </head>
+<body>
+<div data-role="page" id="page">
+  <div data-role="header" data-theme="b" data-position="fixed">
+    <h1>Twitter</h1>
+    <a rel="external" href="../index.html" data-icon="arrow-l">Back</a>
+  </div>
+  <div data-role="content" id="content">
+  	 <ul data-role="listview" data-inset="false" data-filter="true" id="main">
+ 	</ul>
+
+       
+ 	
+  </div>
+  <div data-role="footer">
+   
+  </div>
+</div> 
+</body>
+</html>

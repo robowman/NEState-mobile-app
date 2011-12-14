@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    
+   <script type="text/javascript" src="phonegap.js"></script>     
+        
+    <!-- Start Jquery Mobile Includes -->
+    <link rel="stylesheet" href="jquery.mobile-1.0b1/jquery.mobile-1.0b1.min.css" />
+    <link rel="stylesheet" href="jquery.mobile-1.0b1/nscc-mobile-styles.css" />
+    <script type="text/javascript" src="jquery.mobile-1.0b1/jquery-1.6.2.min.js"></script>
+    <!-- The below script turns on the automatic back buttons sitewide. To turn them off remove the script. It must be located before jquery.mobile is called -->
+    
+       
+        <!-- Displays automatic back button if NOT Android -->
+        <script type="text/javascript">
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf("android") > -1; //&amp;&amp; ua.indexOf("mobile");
+            if(isAndroid) {
+                // Do Nothing!
+            }
+            else {
+                
+                $(document).bind("mobileinit", function() {
+                    $.mobile.page.prototype.options.addBackBtn = true;
+                }); 
+                
+            }
+            </script>
+
+		<script type="text/javascript" src="jquery.mobile-1.0b1/jquery.mobile-1.0b1.min.js"></script>
+    <!-- End Jquery Mobile Includes-->
+        
+        <!-- Begin checkConnection -->
+        <script type="text/javascript">
+             // Wait for PhoneGap to load
+    // 
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
+    //
+    function onDeviceReady() {
+        checkConnection();
+    }
+	 
+	  $( function() {
+              $('.connection_test').bind( 'tap', function() {
+                    checkConnection();
+                    } );  
+              } );
+			  
+    function checkConnection() {
+        var networkState = navigator.network.connection.type;
+
+        var states = {};
+        states[Connection.UNKNOWN]  = 'Unknown connection';
+        states[Connection.ETHERNET] = 'Ethernet connection';
+        states[Connection.WIFI]     = 'WiFi connection';
+        states[Connection.CELL_2G]  = 'Cell 2G connection';
+        states[Connection.CELL_3G]  = 'Cell 3G connection';
+        states[Connection.CELL_4G]  = 'Cell 4G connection';
+        states[Connection.NONE]     = 'No network connection';
+
+        //alert('Connection type: ' + states[networkState]); // uncomment to test
+		  if (states[networkState] == 'No network connection') {
+                    
+                   alert("You are offline. This feature is only available if you are online.");
+				   
+                    
+                }
+                
+                // For the Ipad
+                // When offline it reports as "Unknown connection"
+                // Hopefully PhoneGap will fix with bug.
+                else if (states[networkState] == 'Unknown connection' && !isAndroid) {
+                    
+                    navigator.notification.alert('You are offline. This feature is only available if you are online.',  // Message text
+                        alertDismissed, // Alert callback (what happens when button is pressed)
+                        'Alert', // Alert Title
+                        'OK'  // Button Text
+                        );
+                    
+                    function alertDismissed() {
+                        // This is where you put the code that will run when the user
+                        //  clicks the "OK" button on the checkConnection alert.
+                        
+                    }
+
+                }
+
+                else {
+                  // Do Nothing!
+                }
+		
+    }
+            </script> 
+        <!-- End checkConnection -->
+        
+           
+            
+  </head>
+  <body>
+  	  <!-- Start of first page -->
+      <div data-role="page">
+          
+          <div id="logo">
+              
+              <img src="images/appLogo.png" alt="Northeast State Community College" class="banner" />
+          </div><!-- /logo -->
+          
+          <div data-role="content">	
+              
+              <!-- nonbreakingspace set to display none to fix the first <li> being dark
+                   because nothing was above the listview -->
+              <div id="nonbreakingspace"><a href="">&nbsp;</a></div>
+              
+                  
+              <ul data-role="listview" data-inset="true" data-theme="c"> 				
+                  <li><a href="#about">About Northeast State</a></li>
+                  <li><a href="http://apps.northeaststate.edu/mobile/directory.html" rel="external" onclick="checkConnection();">Campus Directory</a></li>
+                  <li><a href="#maps">Campus Maps</a></li>
+                  <li><a href="http://apps.northeaststate.edu/mobile/news/site.php" rel="external" onclick="checkConnection();">Campus News</a></li> 
+                  <li><a href="#library">Library</a></li>
+                  <li><a href="#sites">Off-Campus Sites</a></li>
+                 
+              </ul>
+              <ul data-role="listview" data-inset="true" data-theme="c">
+                  <li data-role="list-divider">Social</li>
+                  <li><a href="http://m.facebook.com/northeaststate?view=wall&refid=0" rel="external" target="_blank">Facebook</a>
+                  <li><a href="pages/twitter.html" rel="external" onclick="checkConnection();">Twitter</a></li> 
+                  <li> <a href="http://www.youtube.com/user/NortheastStateVideo" rel="external" onclick="checkConnection();" target="_blank">YouTube</a></li>
+              </ul>
+          </div><!-- /content -->
+          
+          <div data-role="footer" data-theme="b">
+              <div id="bottomName">Northeast State Community College</div>
+          </div><!-- /footer -->
+          
+      </div><!-- / first page -->
+      
+
+
+      <!-- Start of About page -->
+      <div data-role="page" id="about">
+          <div data-role="header" data-theme="b">
+              <h1>About Northeast State</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              <p>Northeast State Community College is a comprehensive two-year community college under the governance of the Tennessee Board of Regents of the State University and Community College System of Tennessee. As a comprehensive community college, Northeast State provides university parallel programs designed for students desiring to transfer to another college or university, career programs for students planning to enter the workforce immediately upon graduation, and continuing education and community service programs for professional growth and personal enrichment to the citizens of Carter, Johnson, Sullivan, Unicoi, and Washington Counties.</p>
+              
+              <p>In partnership with the community, the college sustains the effort toward improving the quality of life for residents of the Northeast Tennessee region. Northeast State Community College is accredited by the Commission on Colleges of the Southern Association of Colleges and Schools to award the associate degree. Contact the Commission on Colleges at 1866 Southern Lane, Decatur, Georgia 30033-4097 or call 404.679.4500 for questions about the accreditation of Northeast State.</p>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /About page -->
+      
+      <!-- Start of Campus Maps page -->
+      <div data-role="page" id="maps">
+          <div data-role="header" data-theme="b">
+              <h1>Campus Maps</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <ul data-role="listview" data-inset="true">
+                  
+                  <!-- Main Campus Map -->
+                  <script type="text/javascript">
+                      if(isAndroid) {
+                          document.write("<li><a href=\"pages\/maincampusmap.html\" rel=\"external\" >Main Campus<\/a><\/li>");
+                      }
+                      else {
+                          document.write("<li><a href=\"http:\/\/apps.northeaststate.edu\/mobile\/maincampusmap.html\" rel=\"external\" target=\"_blank\">Main Campus<\/a><\/li>");
+                      }
+                      </script>
+                  
+                  <!-- Kingsport Map -->
+                  <script type="text/javascript">
+                      if(isAndroid) {
+                          document.write("<li><a href=\"pages\/kingsportmap.html\" rel=\"external\" >Kingsport<\/a><\/li>");
+                      }
+                      else {
+                          document.write("<li><a href=\"http:\/\/apps.northeaststate.edu\/mobile\/kingsportmap.html\" rel=\"external\" target=\"_blank\">Kingsport<\/a><\/li>");
+                      }
+                      </script>
+                  
+              </ul>	
+
+                            
+          </div><!-- /content -->
+          
+      </div><!-- /Campus Maps page -->
+
+                      
+                      
+                      <!-- Start of Off-Campus Sites page -->
+                      <div data-role="page" id="sites">
+                      <div data-role="header" data-theme="b">
+                      <h1>Off-Campus Sites</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">
+                      <ul data-role="listview" data-inset="true">
+                      
+                      <li><a href="#elizabethton">Elizabethton</a></li>
+                      
+                      <li><a href="#gray">Gray</a></li>
+                      
+                      <li><a href="#kingsport">Kingsport</a></li>   
+                      
+                      <li><a href="#mountaincity">Mountain City ITV Site</a></li> 
+                      <li><a href="#unicoi">Unicoi ITV Site</a></li>
+                      
+                      </ul>	
+                      </div><!-- /content -->
+                      
+                      </div><!-- /Off-Campus Sites page -->
+                      
+                      
+                      <!-- Start of Elizabethton page -->
+                      <div data-role="page" id="elizabethton">
+                      <div data-role="header" data-theme="b">
+                      <h1>Elizabethton</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">
+                      
+                      <div class="sitesblurb"><p>Offers Day and Evening classes. The site offers a variety of courses in liberal arts, technical, and continuing education programs.</p></div>
+                      <a href="tel:4235478450" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+                      <a href="mailto:cykyoung@northeaststate.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+                      <a href="http://maps.google.com/maps?q=386+Highway+91+North,+Elizabethton,+TN+37643&hl=en&sll=36.351179,-82.229293&sspn=0.011734,0.019741&vpsrc=0&t=h&z=16" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+                      <div class="loctext"><h4>Location:</h4>386 Highway 91 North<br />Elizabethton, TN 37643</div>
+                      
+                      </div><!-- /content -->
+                      
+                      </div><!-- /Elizabethton page -->
+      
+      <!-- Start of Gray page -->
+      <div data-role="page" id="gray">
+          <div data-role="header" data-theme="b">
+              <h1>Gray</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Offers classes at a location more convenient to the citizens of Washington and Sullivan County.  The site offers courses to support general education requirements for the A.A.S. and A.S. degree programs. </p></div>
+              <a href="tel:4233545141" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:jgthacker@NortheastState.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+			<a href="http://maps.google.com/maps?q=120+Dillon+Court+Gray+TN&hl=en&z=16&vpsrc=0" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+              
+              <div class="loctext"><h4>Location:</h4>120 Dillon Ct.<br />Gray, TN 37615</div>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /Gray page -->
+      
+      <!-- Start of Kingsport page -->
+      <div data-role="page" id="kingsport">
+          <div data-role="header" data-theme="b">
+              <h1>Kingsport</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>These five teaching sites make up Northeast State at Kingsport to offer a variety of courses and programs in a convenient downtown location. </p></div>
+              
+              <ul data-role="listview" data-inset="true">
+                  <li><a href="#kche">KCHE
+                  <p>Kingsport Center for Higher Education</p></a></li>
+                  <li><a href="#rcam">RCAM
+                    <p>Reg. Ctr. for Advanced Manufacturing</p></a></li>
+                  <li><a href="#rchp">RCHP
+                    <p>Ref. Ctr. for Health Professions</p></a></li>  
+                  <li><a href="#rcat">RCAT
+                      <p>Reg. Ctr. for Applied Technology</p></a></li>
+                  <li><a href="#rcap">RCAP 
+                      <p>Reg. Ctr. for Automotive Programs</p></a></li>
+              </ul>	
+
+              
+          </div><!-- /content -->
+          
+      </div><!-- /Kingsport page -->
+      
+      <!-- Start of KCHE page -->
+      <div data-role="page" id="kche">
+          <div data-role="header" data-theme="b">
+              <h1>KCHE</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Located in downtown Kingsport. Selected courses leading to associate degrees or transfer to four-year institutions are offered. </p></div>
+              <a href="tel:4233545521" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:kche@NortheastState.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+              <a href="http://maps.google.com/maps?q=300+W.+Market+St..,+Kingsport,+TN&z=16&vpsrc=0" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a> 
+              <div class="loctext"><h4>Location:</h4>300 W. Market St.<br />Kingsport, TN 37660</div>
+                     
+          </div><!-- /content -->
+          
+      </div><!-- /KCHE page -->
+      
+      <!-- Start of RCAM page -->
+      <div data-role="page" id="rcam">
+          <div data-role="header" data-theme="b">
+              <h1>RCAM</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Located in downtown Kingsport. Offers courses for those considering a manufacturing career for the first time or need to learn new skills or seek retraining for the 21st century workforce.</p></div>
+              <a href="tel:4233545149" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:rcam@manufacturingfuture.net" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+              <a href="http://maps.google.com/maps?q=305+West+Main+Street,+Kingsport,+TN&z=16&vpsrc=0" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+              <div class="loctext"><h4>Location:</h4>305 W. Main St.<br />Kingsport, TN 37660</div>
+              
+              
+          </div><!-- /content -->
+          
+      </div><!-- /RCAM page -->
+      
+      <!-- Start of RCHP page -->
+      <div data-role="page" id="rchp">
+          <div data-role="header" data-theme="b">
+              <h1>RCHP</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Located in downtown Kingsport. Offers courses in health-related and nursing programs.</p></div>
+              <a href="tel:4233545151" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:trmullins@northeaststate.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+              <a href="http://maps.google.com/maps?q=300+west+main+street+kingsport+tn&z=16&vpsrc=0" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+              <div class="loctext"><h4>Location:</h4>300 W. Main St.<br />Kingsport, TN 37660</div>
+              
+              
+          </div><!-- /content -->
+          
+      </div><!-- /RCHP page -->
+      
+      <!-- Start of RCAT page -->
+      <div data-role="page" id="rcat">
+          <div data-role="header" data-theme="b">
+              <h1>RCAT</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Located in downtown Kingsport. Holds administrative offices.</p></div>
+              <a href="tel:4233542525" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:rldice@northeaststate.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+              <a href="http://maps.google.com/maps?q=222+West+Main+Street,+Kingsport,+TN&z=16&vpsrc=0" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+              <div class="loctext"><h4>Location:</h4>222 W. Main St.<br />Kingsport, TN 37660</div>
+              
+              
+          </div><!-- /content -->
+          
+      </div><!-- /RCAT page -->
+      
+      <!-- Start of RCAP page -->
+      <div data-role="page" id="rcap">
+          <div data-role="header" data-theme="b">
+              <h1>RCAP</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Coming Soon</p></div>
+              <!--<a href="tel:4233542525" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a> -->
+              <!--<a href="mailto:" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a> -->
+              <!--<a href="javascript:window.plugins.childBrowser.showWebPage('put google maps here');" data-role="button" data-icon="arrow-r" data-iconpos="right" onclick="checkConnection();">Directions</a>-->
+              <div class="loctext"><h4>Location:</h4>Not Available<br />Kingsport, TN 37660</div>
+              
+              
+          </div><!-- /content -->
+          
+      </div><!-- /RCAP page -->
+
+      
+      <!-- Start of Mountain City page -->
+      <div data-role="page" id="mountaincity">
+          <div data-role="header" data-theme="b">
+              <h1>Mountain City ITV Site</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Located in Johnson County. The site offers courses to support general education requirements for the A.A.S. and A.S. degree programs.</p></div>
+              <a href="tel:4233230221" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:evedistedu@NortheastState.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+              <a href="http://maps.google.com/maps?q=2431+South+Shady+Street,+Mountain+City,+TN&hl=en&sll=37.0625,-95.677068&sspn=46.898798,80.859375&vpsrc=0&z=16" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+              <div class="loctext"><h4>Location:</h4>2431 S. Shady St.<br />Mountain City, TN 37683</div>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /Mountain City page -->
+      
+      <!-- Start of Unicoi page -->
+      <div data-role="page" id="unicoi">
+          <div data-role="header" data-theme="b">
+              <h1>Unicoi ITV Site</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              
+              <div class="sitesblurb"><p>Located in Unicoi County. The site offers courses to support general education requirements for the A.A.S. and A.S. degree programs. </p></div>
+              <a href="tel:4233230221" data-role="button" data-icon="arrow-r" data-iconpos="right">Call</a>
+              <a href="mailto:evedistedu@northeaststate.edu" data-role="button" data-icon="arrow-r" data-iconpos="right">Email</a>
+              <a href="http://maps.google.com/maps?q=700+South+Mohawk+Drive,+Erwin,+TN&hl=en&sll=36.443647,-81.796121&sspn=0.011703,0.019741&vpsrc=0&z=16" data-role="button" data-icon="arrow-r" data-iconpos="right" target="_blank">Directions</a>
+              <div class="loctext"><h4>Location:</h4>Unicoi County High School<br />700 S. Mohawk Dr.<br />Erwin, TN 37650<br />Vocational Building - Room 5</div>
+              
+          </div><!-- /content -->
+          
+      </div><!-- /Unicoi page -->
+                      
+                      
+                      <!-- Start of Library page -->
+                      <div data-role="page" id="library">
+                      
+                      <div data-role="header" data-theme="b">
+                      <a href="index.html" data-icon="arrow-l" data-rel="back">Back</a>
+                      <h1>Library</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">	
+                      <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b"> 
+                      <li><a href="http://apps.northeaststate.edu/mobile/hours.php" rel="external">Hours</a></li> 
+                      <li><a href="#askalibrarian">Ask-A-Librarian</a></li> 
+                          <li><a href="http://m.libraries.etsu.edu/patroninfo" rel="external" target="_blank">My Library Account</a></li>
+                      <li><a href="#research">Research</a></li> 
+                      </ul> 
+                      </div><!-- /content -->
+                      
+                      </div><!-- /library page -->
+                      
+                      
+                      <!-- Start of Library Askalibrarian page -->
+                      <div data-role="page" id="askalibrarian">
+                      
+                      <div data-role="header" data-theme="b">
+                      <h1>Ask-A-Librarian</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">
+                      <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+                      <li><a href="tel:4233542458">Call: 423.354.2458</a></li> 
+                      <li><a href="mailto:library@northeaststate.edu?subject=Mobile Ask-A-Librarian">Email</a></li>
+                      </ul>
+                      </div><!-- /content -->
+                      
+                      </div><!-- /askalibrarian page -->
+                      
+                      <!-- Start of Library Research page -->
+                      <div data-role="page" id="research">
+                      
+                      <div data-role="header" data-theme="b">
+                      
+                      <h1>Research</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">
+                      <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+                          <li><a href="http://m.libraries.etsu.edu/" rel="external" target="_blank">Find Books</a></li> 
+                      <li><a href="#articledatabases">Article Databases</a></li>
+                      </ul>
+                      </div><!-- /content -->
+                      
+                      </div><!-- /Research page -->
+                      
+                      <!-- Start of Library Article Databases page -->
+                      <div data-role="page" id="articledatabases">
+                      
+                      <div data-role="header" data-theme="b">
+                      
+                      <h1>Article Databases</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">
+                      <p>Below are a select group of library databases compatable with mobile browsing.
+                      View the <a href="http://www.northeaststate.edu/library" rel="external" target="_blank">Full Site</a> to access all the databases.</p>	
+                      <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+                      <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=OMNIFT" rel="external" target="_blank">Article Quick Search</a></li> 
+                      <li><a href="#a-g">A - G</a></li>
+                      <li><a href="#h-n">H - N</a></li>
+                      <li><a href="#o-z">O - Z</a></li>
+                      </ul>
+                      </div><!-- /content -->
+                      
+                      </div><!-- /Article Databases page -->
+                      
+                      
+                      <!-- Start of Library A - G page -->
+                      <div data-role="page" id="a-g">
+                      
+                      <div data-role="header" data-theme="b">
+                      
+                      <h1>Databases A - G</h1>
+                      </div><!-- /header -->
+                      
+                      <div data-role="content">
+                      <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b"> 
+                      <li data-role="list-divider">A</li>
+                      <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=ASTFT" rel="external" target="_blank">Applied Science Full Text</a></li>
+                      <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=ARTFT,ARTR" rel="external" target="_blank">Art Index &amp; Retrospective</a></li>
+                  <li data-role="list-divider">B</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=BAIN" rel="external" target="_blank">Biological &amp; Agricultural Index Plus</a></li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=BUSFT" rel="external" target="_blank">Business Full Text</a></li>
+                  <li data-role="list-divider">C</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=mobsmart&defaultdb=c8h" rel="external" target="_blank">Cinahl with Full Text</a></li>
+                  <li data-role="list-divider">E</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=EDUFT" rel="external" target="_blank">Education Full Text</a></li>
+                  <li data-role="list-divider">G</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=GSFT" rel="external" target="_blank">General Science Full Text</a></li>
+              </ul>
+          </div><!-- /content -->
+          
+      </div><!-- A - G page -->
+      
+      <!-- Start of Libary H - N page -->
+      <div data-role="page" id="h-n">
+          
+          <div data-role="header" data-theme="b">
+              
+              <h1>Databases H - N</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b"> 
+                  <li data-role="list-divider">H</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=mobsmart&defaultdb=hch" rel="external" target="_blank">Health Source: Nursing Academic</a></li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=HUMFT" rel="external" target="_blank">Humanities Full Text</a></li>
+                  <li data-role="list-divider">L</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=ILPFT" rel="external" target="_blank">Legal Periodicals Full Text</a></li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=LIBFT" rel="external" target="_blank">Library Literature &amp; Information Science Full Text</a></li>
+                  <li data-role="list-divider">N</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://search.ebscohost.com/login.aspx?authtype=ip,uid&profile=mobsmart&defaultdb=nyh" rel="external" target="_blank">Nursing and Allied Health Collection: Comprehensive</a></li>
+              </ul>
+          </div><!-- /content -->
+          
+      </div><!-- H - N page -->
+      
+      <!-- Start of Library O - Z page -->
+      <div data-role="page" id="o-z">
+          
+          <div data-role="header" data-theme="b">
+              <h1>Databases O - Z</h1>
+          </div><!-- /header -->
+          
+          <div data-role="content">
+              <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b"> 
+                  <li data-role="list-divider">O</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=OMNIFT" rel="external" target="_blank">OmniFile Full Text Mega</a></li>
+                  <li data-role="list-divider">R</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=RDGFT" rel="external" target="_blank">Readers&#39; Guide Full Text</a></li>
+                  <li data-role="list-divider">S</li>
+                  <li><a href="https://www.northeaststate.edu:3443/login?url=http://vnweb.hwwilsonweb.com/hww/jumpstart.jhtml?prod=SSFT" rel="external" target="_blank">Social Sciences Full Text</a></li>
+              </ul>
+          </div><!-- /content -->
+          
+      </div><!-- H - N page -->
+      
+      	
+  </body>
+</html>
