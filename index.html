@@ -4,7 +4,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    
+ <style>
+  
+/* Removes the padding from the directory iframe */
+#directory .ui-content {padding: 0px !important;}
+#directory .ui-listview-filter {margin: 0px !important;}
+#directory .ui-content .ui-listview {margin: 0px !important;}
+
+/* Removes the padding from the news iframe */
+#news .ui-content {padding: 0px !important;}
+#news .ui-listview-filter {margin: 0px !important;}
+#news .ui-content .ui-listview {margin: 0px !important;}
+
+/* Removes the padding from the Main Campus Map iframe */
+#maincampusmap .ui-content {padding: 0px !important;}
+#maincampusmap .ui-listview-filter {margin: 0px !important;}
+#maincampusmap .ui-content .ui-listview {margin: 0px !important;}
+
+/* Removes the padding from the Kingsport Map iframe */
+#kingsportmap .ui-content {padding: 0px !important;}
+#kingsportmap .ui-listview-filter {margin: 0px !important;}
+#kingsportmap .ui-content .ui-listview {margin: 0px !important;}
+
+#dashboard {
+	background-image:url(dashboard/background.png);
+	background-size:320px 480px;
+	background-repeat:no-repeat;
+}
+
+/*Centers Images in their columns on dashboard*/
+#dashboard img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#dashboard .icontext {
+	padding-bottom:40px;
+	text-align:center;
+	font-size:11px;
+	font-weight:bold;
+}
+
+#logo img {
+	margin-top:-10px;
+	display:block;
+}
+
+#infobutton img {
+	padding-left:270px;
+}
+
+#info .projectinfoheaders {
+	text-align:center;
+	font-size:14px;
+	font-weight:bold;
+}
+
+#info .projectinfonames {
+	text-align:center;
+	font-size:12px;
+}
+</style>   
    <script type="text/javascript" src="phonegap.js"></script>     
         
     <!-- Start Jquery Mobile Includes -->
@@ -102,41 +163,40 @@
             
   </head>
   <body>
-  	  <!-- Start of first page -->
+  	   <!-- Start of first page -->
       <div data-role="page">
           
-          <div id="logo">
+                  <div data-role="content" id="dashboard">	
               
-              <img src="images/appLogo.png" alt="Northeast State Community College" class="banner" />
+              <fieldset class="ui-grid-b">
+                <div class="ui-block-a"> <a href="http://apps.northeaststate.edu/mobile/directory.html" rel="external" onclick="checkConnection();"><img src="dashboard/directory-57.png" width="57" height="57"/></a><div class="icontext">Directory</div>
+                </div>
+                <div class="ui-block-b"> <a href="#maps"><img src="dashboard/maps-57.png" width="57" height="57"/></a><div class="icontext">Maps</div>
+                </div>
+                <div class="ui-block-c"> <a href="http://apps.northeaststate.edu/mobile/news/site.php" rel="external" onclick="checkConnection();"><img src="dashboard/news-57.png" width="57" height="57"/></a><div class="icontext">News</div>
+                </div>
+                <div class="ui-block-a"> <a href="#sites"><img src="dashboard/sites-57.png" width="57" height="57"/></a><div class="icontext">Campus Sites</div>
+                </div>
+                <div class="ui-block-b"> <a href="#library"><img src="dashboard/library-57.png" width="57" height="57"/></a><div class="icontext">Library</div>
+                </div>
+                <div class="ui-block-c"> <a href="http://m.facebook.com/northeaststate?view=wall&refid=0"  rel="external" onclick="checkConnection();"><img src="dashboard/facebook-57.png" width="57" height="57"/></a><div class="icontext">Facebook</div>
+                </div>
+                <div class="ui-block-a"> <a href="pages/twitter.html" rel="external" onclick="checkConnection();"><img src="dashboard/twitter-57.png" width="57" height="57"/></a><div class="icontext">Twitter</div>
+                </div>
+                <div class="ui-block-b"> <a href="http://www.youtube.com/user/NortheastStateVideo" rel="external" target="_blank"><img src="dashboard/youtube-57.png" width="57" height="57"/></a><div class="icontext">YouTube</div>
+                </div>
+            </fieldset>
+              
+          <div id="logo">
+              <img src="dashboard/logo.png" width="250"/>
           </div><!-- /logo -->
           
-          <div data-role="content">	
-              
-              <!-- nonbreakingspace set to display none to fix the first <li> being dark
-                   because nothing was above the listview -->
-              <div id="nonbreakingspace"><a href="">&nbsp;</a></div>
-              
-                  
-              <ul data-role="listview" data-inset="true" data-theme="c"> 				
-                  <li><a href="#about">About Northeast State</a></li>
-                  <li><a href="http://apps.northeaststate.edu/mobile/directory.html" rel="external" onclick="checkConnection();">Campus Directory</a></li>
-                  <li><a href="#maps">Campus Maps</a></li>
-                  <li><a href="http://apps.northeaststate.edu/mobile/news/site.php" rel="external" onclick="checkConnection();">Campus News</a></li> 
-                  <li><a href="#library">Library</a></li>
-                  <li><a href="#sites">Off-Campus Sites</a></li>
-                 
-              </ul>
-              <ul data-role="listview" data-inset="true" data-theme="c">
-                  <li data-role="list-divider">Social</li>
-                  <li><a href="http://m.facebook.com/northeaststate?view=wall&refid=0" rel="external" target="_blank">Facebook</a>
-                  <li><a href="pages/twitter.html" rel="external" onclick="checkConnection();">Twitter</a></li> 
-                  <li> <a href="http://www.youtube.com/user/NortheastStateVideo" rel="external" onclick="checkConnection();" target="_blank">YouTube</a></li>
-              </ul>
-          </div><!-- /content -->
+          <div id="infobutton"> <a href="#info"><img src="dashboard/12-eye.png" width="20"/></a>
+          </div><!-- /info -->
           
-          <div data-role="footer" data-theme="b">
-              <div id="bottomName">Northeast State Community College</div>
-          </div><!-- /footer -->
+          
+        </div><!-- /content -->
+
           
       </div><!-- / first page -->
       
