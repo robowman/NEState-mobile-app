@@ -58,18 +58,9 @@
        
         <!-- Displays automatic back button if NOT Android -->
         <script type="text/javascript">
-            var ua = navigator.userAgent.toLowerCase();
-            var isAndroid = ua.indexOf("android") > -1; //&amp;&amp; ua.indexOf("mobile");
-            if(isAndroid) {
-                // Do Nothing!
-            }
-            else {
-                
-                $(document).bind("mobileinit", function() {
-                    $.mobile.page.prototype.options.addBackBtn = true;
-                }); 
-                
-            }
+           $(document).bind("mobileinit", function(){
+      			$.mobile.defaultTransition = 'none';
+			});
             </script>
 
 		<script type="text/javascript" src="jquery.mobile-1.0b1/jquery.mobile-1.0b1.min.js"></script>
